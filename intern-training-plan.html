@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJ's Chalo Seekhen — Intern Training Program 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0b0d11;
+            --bg-secondary: #111318;
+            --bg-card: #151820;
+            --bg-card-alt: #1a1d28;
+            --bg-hover: #1e2230;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #eef0f6;
+            --text-secondary: #9498a8;
+            --text-muted: #5c6070;
+            --accent-blue: #5b8def;
+            --accent-purple: #9775f5;
+            --accent-pink: #e86ca0;
+            --accent-orange: #f0943a;
+            --accent-green: #3ec989;
+            --accent-cyan: #36bfcf;
+            --accent-yellow: #e8c840;
+            --accent-red: #e85c5c;
+            --gradient-hero: linear-gradient(135deg, #5b8def 0%, #9775f5 40%, #e86ca0 70%, #f0943a 100%);
+            --shadow-card: 0 2px 20px rgba(0,0,0,0.25);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.75;
+            overflow-x: hidden;
+            font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(11,13,17,0.85); backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .nav.scrolled { background: rgba(11,13,17,0.96); box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+            display: flex; align-items: center; justify-content: space-between; height: 60px;
+        }
+        .nav-logo {
+            font-weight: 800; font-size: 1rem;
+            background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .nav-links { display: flex; gap: 0.15rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;
+            padding: 0.35rem 0.7rem; border-radius: var(--radius-sm); transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+        .nav-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.4rem; cursor: pointer; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 5rem 1.5rem 4rem; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -40%; left: -30%; width: 160%; height: 160%;
+            background: radial-gradient(ellipse at 30% 30%, rgba(91,141,239,0.07) 0%, transparent 55%),
+                        radial-gradient(ellipse at 70% 60%, rgba(151,117,245,0.05) 0%, transparent 55%);
+            animation: drift 25s ease-in-out infinite;
+        }
+        @keyframes drift {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(2%,-2%); }
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+        }
+        .hero-content { text-align: center; position: relative; z-index: 1; max-width: 820px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.35rem 0.9rem; border-radius: 100px;
+            background: rgba(91,141,239,0.08); border: 1px solid rgba(91,141,239,0.18);
+            color: var(--accent-blue); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.5rem;
+            animation: fadeUp 0.7s ease both;
+        }
+        .hero-badge .dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+        .hero h1 {
+            font-size: clamp(2.2rem,5.5vw,3.8rem); font-weight: 900; line-height: 1.12;
+            letter-spacing: -0.03em; margin-bottom: 1.25rem; animation: fadeUp 0.7s ease 0.08s both;
+        }
+        .hero h1 .grad { background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero .subtitle {
+            font-size: 1.1rem; color: var(--text-secondary); max-width: 580px; margin: 0 auto 2rem;
+            animation: fadeUp 0.7s ease 0.16s both;
+        }
+        .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; animation: fadeUp 0.7s ease 0.24s both; }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 1.7rem; font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-stat .lbl { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+        /* ===== REUSABLE ===== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 5rem 0; }
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .section-label.blue { color: var(--accent-blue); }
+        .section-label.purple { color: var(--accent-purple); }
+        .section-label.green { color: var(--accent-green); }
+        .section-label.orange { color: var(--accent-orange); }
+        .section-title { font-size: clamp(1.6rem,3.5vw,2.4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+        .section-desc { color: var(--text-secondary); max-width: 560px; margin: 0 auto; font-size: 1rem; }
+        .divider { height: 1px; background: var(--border); margin: 0; }
+
+        /* ===== WHAT TO EXPECT (Welcome section) ===== */
+        .welcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+        .welcome-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+            padding: 1.75rem; transition: all 0.25s;
+        }
+        .welcome-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+        .welcome-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+        .welcome-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+        .welcome-text { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; }
+
+        /* ===== PREREQUISITES ===== */
+        .prereq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+        .prereq-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem;
+            display: flex; gap: 1rem; align-items: flex-start;
+        }
+        .prereq-level {
+            padding: 0.25rem 0.55rem; border-radius: 6px; font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; margin-top: 0.15rem;
+        }
+        .prereq-level.required { background: rgba(232,92,92,0.12); color: var(--accent-red); }
+        .prereq-level.helpful { background: rgba(62,201,137,0.12); color: var(--accent-green); }
+        .prereq-level.bonus { background: rgba(91,141,239,0.12); color: var(--accent-blue); }
+        .prereq-name { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.15rem; }
+        .prereq-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+        /* ===== JOURNEY MAP ===== */
+        .journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .journey-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+            padding: 2rem; position: relative; overflow: hidden; transition: all 0.25s;
+        }
+        .journey-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--shadow-card); }
+        .journey-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        }
+        .journey-card.m1::before { background: var(--accent-blue); }
+        .journey-card.m2::before { background: var(--accent-purple); }
+        .journey-card.m3::before { background: var(--accent-green); }
+        .journey-phase { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.35rem; }
+        .journey-phase.m1 { color: var(--accent-blue); }
+        .journey-phase.m2 { color: var(--accent-purple); }
+        .journey-phase.m3 { color: var(--accent-green); }
+        .journey-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .journey-desc { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .journey-outcomes { list-style: none; }
+        .journey-outcomes li { font-size: 0.84rem; color: var(--text-secondary); padding: 0.3rem 0; display: flex; gap: 0.5rem; align-items: flex-start; }
+        .journey-outcomes li .check { color: var(--accent-green); flex-shrink: 0; font-weight: 700; }
+
+        /* ===== TECH STACK ===== */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; }
+        .tech-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+            padding: 1.25rem; text-align: center; transition: all 0.2s;
+        }
+        .tech-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .tech-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+        .tech-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.15rem; }
+        .tech-use { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* ===== MONTH SECTIONS ===== */
+        .month-section { padding: 4rem 0; }
+        .month-banner {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+            padding: 2.5rem; margin-bottom: 2.5rem; position: relative; overflow: hidden;
+        }
+        .month-banner::before {
+            content: ''; position: absolute; inset: 0; opacity: 0.04;
+        }
+        .month-banner.m1::before { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); }
+        .month-banner.m2::before { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); }
+        .month-banner.m3::before { background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); }
+        .month-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .month-label.m1 { color: var(--accent-blue); }
+        .month-label.m2 { color: var(--accent-purple); }
+        .month-label.m3 { color: var(--accent-green); }
+        .month-title { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+        .month-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem; max-width: 650px; }
+        .month-goal {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            font-size: 0.85rem; color: var(--text-secondary);
+        }
+        .month-goal strong { color: var(--text-primary); }
+
+        /* ===== WEEK ACCORDION ===== */
+        .week-block {
+            border: 1px solid var(--border); border-radius: var(--radius-md);
+            margin-bottom: 1rem; overflow: hidden; background: var(--bg-card); transition: all 0.2s;
+        }
+        .week-block:hover { border-color: var(--border-hover); }
+        .week-header {
+            padding: 1.15rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer; user-select: none; transition: background 0.2s;
+        }
+        .week-header:hover { background: rgba(255,255,255,0.015); }
+        .week-left { display: flex; align-items: center; gap: 0.75rem; }
+        .week-tag {
+            font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            padding: 0.2rem 0.6rem; border-radius: 5px; white-space: nowrap;
+        }
+        .week-tag.blue { background: rgba(91,141,239,0.1); color: var(--accent-blue); }
+        .week-tag.purple { background: rgba(151,117,245,0.1); color: var(--accent-purple); }
+        .week-tag.pink { background: rgba(232,108,160,0.1); color: var(--accent-pink); }
+        .week-tag.green { background: rgba(62,201,137,0.1); color: var(--accent-green); }
+        .week-tag.orange { background: rgba(240,148,58,0.1); color: var(--accent-orange); }
+        .week-tag.cyan { background: rgba(54,191,207,0.1); color: var(--accent-cyan); }
+        .week-title { font-weight: 700; font-size: 0.95rem; }
+        .week-chevron { color: var(--text-muted); transition: transform 0.3s; font-size: 0.9rem; }
+        .week-block.open .week-chevron { transform: rotate(180deg); }
+        .week-content { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+        .week-block.open .week-content { max-height: 8000px; }
+        .week-body { padding: 0.5rem 1.5rem 1.75rem; }
+
+        /* ===== LEARNING GOAL BOX ===== */
+        .goal-box {
+            background: rgba(91,141,239,0.06); border: 1px solid rgba(91,141,239,0.12);
+            border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+        }
+        .goal-box.purple { background: rgba(151,117,245,0.06); border-color: rgba(151,117,245,0.12); }
+        .goal-box.green { background: rgba(62,201,137,0.06); border-color: rgba(62,201,137,0.12); }
+        .goal-box.orange { background: rgba(240,148,58,0.06); border-color: rgba(240,148,58,0.12); }
+        .goal-box-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.3rem; }
+        .goal-box.purple .goal-box-label { color: var(--accent-purple); }
+        .goal-box.green .goal-box-label { color: var(--accent-green); }
+        .goal-box.orange .goal-box-label { color: var(--accent-orange); }
+        .goal-box-text { font-size: 0.9rem; color: var(--text-secondary); }
+        .goal-box-text strong { color: var(--text-primary); }
+
+        /* ===== REAL WORLD NOTE ===== */
+        .real-note {
+            background: var(--bg-card-alt); border-left: 3px solid var(--accent-yellow);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: 0.88rem;
+        }
+        .real-note .note-label { font-weight: 700; color: var(--accent-yellow); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.2rem; }
+        .real-note p { color: var(--text-secondary); }
+
+        /* ===== TIP ===== */
+        .tip-box {
+            background: rgba(62,201,137,0.05); border: 1px solid rgba(62,201,137,0.12);
+            border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: 0.88rem;
+        }
+        .tip-box .tip-label { font-weight: 700; color: var(--accent-green); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.2rem; }
+        .tip-box p { color: var(--text-secondary); }
+
+        /* ===== DATA TABLE ===== */
+        .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.86rem; }
+        .data-table thead th {
+            text-align: left; padding: 0.7rem 1rem; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01);
+        }
+        .data-table tbody td {
+            padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.025);
+            color: var(--text-secondary); vertical-align: top;
+        }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+        .data-table tbody tr:hover td { background: rgba(255,255,255,0.015); }
+        .data-table .hl { color: var(--text-primary); font-weight: 600; }
+
+        /* ===== CHECKLIST ===== */
+        .checklist { list-style: none; display: grid; gap: 0.5rem; }
+        .check-item {
+            display: flex; gap: 0.7rem; align-items: flex-start;
+            padding: 0.65rem 1rem; background: rgba(255,255,255,0.015);
+            border-radius: var(--radius-sm); border: 1px solid transparent; transition: all 0.2s;
+        }
+        .check-item:hover { border-color: var(--border); background: rgba(255,255,255,0.03); }
+        .check-box {
+            width: 18px; height: 18px; border: 2px solid var(--text-muted); border-radius: 5px;
+            flex-shrink: 0; margin-top: 3px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s; font-size: 0.65rem;
+        }
+        .check-box:hover { border-color: var(--accent-blue); }
+        .check-box.done { background: var(--accent-green); border-color: var(--accent-green); }
+        .check-box.done::after { content: '✓'; color: white; font-weight: 800; }
+        .check-label strong { color: var(--text-primary); font-weight: 600; }
+        .check-label { font-size: 0.88rem; color: var(--text-secondary); }
+        .check-label .sub { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+        /* ===== MODULE CARDS ===== */
+        .mod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; margin: 1.25rem 0; }
+        .mod-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+            padding: 1.5rem; position: relative; overflow: hidden; transition: all 0.25s;
+        }
+        .mod-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .mod-card.c-blue::before { background: var(--accent-blue); }
+        .mod-card.c-purple::before { background: var(--accent-purple); }
+        .mod-card.c-green::before { background: var(--accent-green); }
+        .mod-card.c-pink::before { background: var(--accent-pink); }
+        .mod-card.c-orange::before { background: var(--accent-orange); }
+        .mod-card.c-cyan::before { background: var(--accent-cyan); }
+        .mod-card.c-yellow::before { background: var(--accent-yellow); }
+        .mod-card.c-red::before { background: var(--accent-red); }
+        .mod-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+        .mod-emoji { font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .mod-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.1rem; }
+        .mod-meaning { font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.6rem; font-style: italic; }
+        .mod-explain { font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.9rem; line-height: 1.6; }
+        .mod-section-label { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+        .mod-tasks { list-style: none; font-size: 0.82rem; margin-bottom: 0.75rem; }
+        .mod-tasks li { padding: 0.25rem 0; color: var(--text-secondary); display: flex; gap: 0.4rem; }
+        .mod-tasks li::before { content: '→'; color: var(--text-muted); flex-shrink: 0; }
+        .mod-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+        .mod-tag {
+            font-size: 0.68rem; font-weight: 600; padding: 0.15rem 0.5rem;
+            border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border);
+        }
+
+        /* ===== SPRINT TIMELINE ===== */
+        .sprint-timeline { margin: 1rem 0; }
+        .sprint-day {
+            display: grid; grid-template-columns: 90px 1fr; border-bottom: 1px solid rgba(255,255,255,0.025);
+        }
+        .sprint-day:last-child { border-bottom: none; }
+        .sprint-day-label {
+            padding: 0.8rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+            font-weight: 600; color: var(--text-muted); border-right: 1px solid rgba(255,255,255,0.03);
+        }
+        .sprint-day-content { padding: 0.8rem 1rem; font-size: 0.88rem; color: var(--text-secondary); }
+        .sprint-day-content strong { color: var(--text-primary); }
+
+        /* ===== EVAL CARDS ===== */
+        .eval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; }
+        .eval-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+            padding: 1.75rem; position: relative; overflow: hidden;
+        }
+        .eval-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .eval-card.m1::before { background: var(--accent-blue); }
+        .eval-card.m2::before { background: var(--accent-purple); }
+        .eval-card.m3::before { background: var(--accent-green); }
+        .eval-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .eval-label.m1 { color: var(--accent-blue); }
+        .eval-label.m2 { color: var(--accent-purple); }
+        .eval-label.m3 { color: var(--accent-green); }
+        .eval-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 1rem; }
+        .eval-list { list-style: none; }
+        .eval-list li {
+            padding: 0.45rem 0; font-size: 0.86rem; color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.025); display: flex; gap: 0.5rem; align-items: flex-start;
+        }
+        .eval-list li:last-child { border-bottom: none; }
+
+        /* ===== RITUAL GRID ===== */
+        .ritual-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+        .ritual-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+            padding: 1.25rem; transition: all 0.2s;
+        }
+        .ritual-card:hover { border-color: var(--border-hover); }
+        .ritual-freq { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 0.3rem; }
+        .ritual-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 0.2rem; }
+        .ritual-detail { font-size: 0.82rem; color: var(--text-muted); }
+
+        /* ===== DAILY SCHEDULE ===== */
+        .schedule { max-width: 700px; margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+        .schedule-row { display: grid; grid-template-columns: 120px 1fr; border-bottom: 1px solid rgba(255,255,255,0.025); }
+        .schedule-row:last-child { border-bottom: none; }
+        .schedule-time {
+            padding: 0.7rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+            font-weight: 600; color: var(--text-muted); border-right: 1px solid rgba(255,255,255,0.025);
+            display: flex; align-items: center;
+        }
+        .schedule-act { padding: 0.7rem 1rem; font-size: 0.86rem; color: var(--text-secondary); }
+        .schedule-act strong { color: var(--text-primary); }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.75rem;
+            background: var(--bg-card); overflow: hidden;
+        }
+        .faq-q {
+            padding: 1rem 1.5rem; cursor: pointer; user-select: none; display: flex;
+            align-items: center; justify-content: space-between; font-weight: 600; font-size: 0.92rem;
+            transition: background 0.2s;
+        }
+        .faq-q:hover { background: rgba(255,255,255,0.015); }
+        .faq-chevron { color: var(--text-muted); transition: transform 0.3s; font-size: 0.85rem; }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .faq-item.open .faq-a { max-height: 500px; }
+        .faq-a-inner { padding: 0 1.5rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ===== BADGE ===== */
+        .badge {
+            display: inline-flex; padding: 0.12rem 0.45rem; border-radius: 4px;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;
+        }
+        .badge.fe { background: rgba(91,141,239,0.1); color: var(--accent-blue); }
+        .badge.be { background: rgba(62,201,137,0.1); color: var(--accent-green); }
+        .badge.fs { background: rgba(151,117,245,0.1); color: var(--accent-purple); }
+        .badge.db { background: rgba(240,148,58,0.1); color: var(--accent-orange); }
+        .badge.ai { background: rgba(232,108,160,0.1); color: var(--accent-pink); }
+
+        /* ===== FOOTER ===== */
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid var(--border); }
+        .footer p { color: var(--text-muted); font-size: 0.82rem; }
+        .footer .brand { font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-wrap { margin: 1rem 0; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.04); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 3px; transition: width 1.2s ease; }
+        .progress-fill.blue { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
+        .progress-fill.purple { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
+        .progress-fill.green { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .journey { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0;
+                background: rgba(11,13,17,0.98); padding: 1rem; border-bottom: 1px solid var(--border);
+            }
+            .nav-toggle { display: block; }
+            .hero-stats { gap: 1.5rem; }
+            .mod-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .nav { display: none; }
+            body { background: white; color: #111; }
+            .week-content { max-height: none !important; }
+            .faq-a { max-height: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <div class="nav-logo">AJ's Chalo Seekhen</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#welcome">Welcome</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#techstack">Tech Stack</a></li>
+            <li><a href="#month1">Month 1</a></li>
+            <li><a href="#month2">Month 2</a></li>
+            <li><a href="#month3">Month 3</a></li>
+            <li><a href="#evaluation">Evaluation</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+        <div class="hero-badge"><span class="dot"></span>Full-Stack Intern Training 2026</div>
+        <h1>Learn. Build. <span class="grad">Own.</span></h1>
+        <p class="subtitle">A 90-day structured program that takes you from your first line of code in our codebase to owning a complete module. No guesswork &mdash; every week has a clear goal.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="num">90</div><div class="lbl">Days</div></div>
+            <div class="hero-stat"><div class="num">12</div><div class="lbl">Weeks</div></div>
+            <div class="hero-stat"><div class="num">12+</div><div class="lbl">Modules</div></div>
+            <div class="hero-stat"><div class="num">3</div><div class="lbl">Phases</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WELCOME ===== -->
+<section class="section" id="welcome">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label blue">Welcome</div>
+            <h2 class="section-title">What to Expect</h2>
+            <p class="section-desc">Here's how this program works and what we expect from you. Read this before Day 1.</p>
+        </div>
+
+        <div class="welcome-grid">
+            <div class="welcome-card">
+                <div class="welcome-icon">&#127919;</div>
+                <div class="welcome-title">This is NOT a Classroom</div>
+                <div class="welcome-text">You won't sit through lectures. You'll learn by building real features that real students will use. Every week, you'll write code that goes into production.</div>
+            </div>
+            <div class="welcome-card">
+                <div class="welcome-icon">&#128736;</div>
+                <div class="welcome-title">You'll Ship Real Code</div>
+                <div class="welcome-text">By the end of Month 1, you'll have merged your first pull request. By Month 3, you'll own an entire module end-to-end &mdash; database, API, and UI.</div>
+            </div>
+            <div class="welcome-card">
+                <div class="welcome-icon">&#129309;</div>
+                <div class="welcome-title">Mentorship, Not Micromanagement</div>
+                <div class="welcome-text">You'll have a dedicated mentor for weekly 1-on-1s, but you're expected to drive your own learning. Ask questions early &mdash; don't wait until you're stuck for hours.</div>
+            </div>
+            <div class="welcome-card">
+                <div class="welcome-icon">&#128200;</div>
+                <div class="welcome-title">Clear Milestones</div>
+                <div class="welcome-text">No surprise evaluations. Each month ends with a clearly defined deliverable. You'll always know where you stand and what's expected next.</div>
+            </div>
+            <div class="welcome-card">
+                <div class="welcome-icon">&#128170;</div>
+                <div class="welcome-title">It's OK to Not Know Things</div>
+                <div class="welcome-text">We don't expect you to know everything on Day 1. We expect you to be curious, ask questions, Google things, read docs, and grow every single day.</div>
+            </div>
+            <div class="welcome-card">
+                <div class="welcome-icon">&#127942;</div>
+                <div class="welcome-title">Performance &rarr; Opportunity</div>
+                <div class="welcome-text">Top-performing interns will be considered for full-time roles or extended collaborations. Your capstone project is your portfolio piece.</div>
+            </div>
+        </div>
+
+        <!-- Prerequisites -->
+        <div style="margin-top: 3.5rem;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">Prerequisites</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">You don't need to be an expert. Here's what you should know before starting, and what we'll teach you.</p>
+            <div class="prereq-grid">
+                <div class="prereq-card">
+                    <span class="prereq-level required">Required</span>
+                    <div><div class="prereq-name">HTML, CSS & JavaScript basics</div><div class="prereq-desc">You can build a simple webpage from scratch. You understand variables, functions, arrays, and objects in JS.</div></div>
+                </div>
+                <div class="prereq-card">
+                    <span class="prereq-level required">Required</span>
+                    <div><div class="prereq-name">Basic Git</div><div class="prereq-desc">You've used git clone, git add, git commit, git push before. You know what a branch is.</div></div>
+                </div>
+                <div class="prereq-card">
+                    <span class="prereq-level helpful">Helpful</span>
+                    <div><div class="prereq-name">React fundamentals</div><div class="prereq-desc">You've built at least one small React app. You understand components, props, state, and useEffect.</div></div>
+                </div>
+                <div class="prereq-card">
+                    <span class="prereq-level helpful">Helpful</span>
+                    <div><div class="prereq-name">Basic SQL</div><div class="prereq-desc">You can write SELECT, INSERT, UPDATE queries. You understand tables, columns, and foreign keys.</div></div>
+                </div>
+                <div class="prereq-card">
+                    <span class="prereq-level bonus">Bonus</span>
+                    <div><div class="prereq-name">Next.js or TypeScript</div><div class="prereq-desc">Any experience with Next.js or TypeScript is a plus, but we'll teach you from scratch if needed.</div></div>
+                </div>
+                <div class="prereq-card">
+                    <span class="prereq-level bonus">Bonus</span>
+                    <div><div class="prereq-name">Supabase or Firebase</div><div class="prereq-desc">Any Backend-as-a-Service experience helps, but not required at all.</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== JOURNEY MAP ===== -->
+<section class="section" id="journey">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label purple">Your Journey</div>
+            <h2 class="section-title">3 Months, 3 Phases</h2>
+            <p class="section-desc">Each month builds on the last. Here's the big picture before we dive into the details.</p>
+        </div>
+        <div class="journey">
+            <div class="journey-card m1">
+                <div class="journey-phase m1">Month 1 &mdash; Weeks 1&ndash;4</div>
+                <div class="journey-title">Learn &amp; Understand</div>
+                <div class="journey-desc">Set up your environment, explore all 12+ modules, learn the tech stack, and make your first contributions.</div>
+                <ul class="journey-outcomes">
+                    <li><span class="check">&#10003;</span> Understand every module's purpose and status</li>
+                    <li><span class="check">&#10003;</span> Run the project locally and navigate the codebase</li>
+                    <li><span class="check">&#10003;</span> Master Next.js, Supabase, TypeScript, Tailwind</li>
+                    <li><span class="check">&#10003;</span> Merge 3+ pull requests</li>
+                    <li><span class="check">&#10003;</span> Present a module audit report</li>
+                </ul>
+            </div>
+            <div class="journey-card m2">
+                <div class="journey-phase m2">Month 2 &mdash; Weeks 5&ndash;8</div>
+                <div class="journey-title">Build &amp; Ship</div>
+                <div class="journey-desc">Study remaining modules, explore sub-products (GroerX, Santulan AI, AJ's Bazaar), and own a feature from spec to deploy.</div>
+                <ul class="journey-outcomes">
+                    <li><span class="check">&#10003;</span> Complete knowledge of all 12+ modules</li>
+                    <li><span class="check">&#10003;</span> Contribute to at least one sub-product</li>
+                    <li><span class="check">&#10003;</span> Write a feature spec with DB schema + API design</li>
+                    <li><span class="check">&#10003;</span> Build and deploy a full-stack feature to staging</li>
+                    <li><span class="check">&#10003;</span> Pass code review with score &ge; 7/10</li>
+                </ul>
+            </div>
+            <div class="journey-card m3">
+                <div class="journey-phase m3">Month 3 &mdash; Weeks 9&ndash;12</div>
+                <div class="journey-title">Own &amp; Master</div>
+                <div class="journey-desc">Connect modules together, tackle advanced topics (AI, performance, security), deliver a capstone project, and hand off your work.</div>
+                <ul class="journey-outcomes">
+                    <li><span class="check">&#10003;</span> Build cross-module integrations</li>
+                    <li><span class="check">&#10003;</span> Ship performance &amp; security improvements</li>
+                    <li><span class="check">&#10003;</span> Deliver a capstone project end-to-end</li>
+                    <li><span class="check">&#10003;</span> Write complete handoff documentation</li>
+                    <li><span class="check">&#10003;</span> Present final demo to stakeholders</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== TECH STACK ===== -->
+<section class="section" id="techstack">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label orange">Tools &amp; Technologies</div>
+            <h2 class="section-title">Your Tech Stack</h2>
+            <p class="section-desc">These are the tools you'll use every day. Don't worry if some are new &mdash; Week 2 is dedicated to learning them.</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-card"><div class="tech-icon">&#9889;</div><div class="tech-name">Next.js 14+</div><div class="tech-use">Routing, SSR, API routes</div></div>
+            <div class="tech-card"><div class="tech-icon">&#9883;&#65039;</div><div class="tech-name">React 18+</div><div class="tech-use">Components, hooks, state</div></div>
+            <div class="tech-card"><div class="tech-icon">&#128310;</div><div class="tech-name">TypeScript</div><div class="tech-use">Type-safe JavaScript</div></div>
+            <div class="tech-card"><div class="tech-icon">&#127912;</div><div class="tech-name">Tailwind CSS</div><div class="tech-use">Utility-first styling</div></div>
+            <div class="tech-card"><div class="tech-icon">&#128451;&#65039;</div><div class="tech-name">Supabase</div><div class="tech-use">Database, Auth, Storage</div></div>
+            <div class="tech-card"><div class="tech-icon">&#9650;</div><div class="tech-name">Vercel</div><div class="tech-use">Deployment &amp; hosting</div></div>
+            <div class="tech-card"><div class="tech-icon">&#128025;</div><div class="tech-name">Git &amp; GitHub</div><div class="tech-use">Version control &amp; PRs</div></div>
+            <div class="tech-card"><div class="tech-icon">&#129302;</div><div class="tech-name">Claude AI</div><div class="tech-use">AI features &amp; prompts</div></div>
+        </div>
+        <div class="real-note">
+            <div class="note-label">Why this stack?</div>
+            <p>We chose these tools because they let a small team move fast. Next.js + Supabase means you can build a full-stack feature in days, not weeks. TypeScript catches bugs before users do. Tailwind keeps our UI consistent. And Vercel deploys your code in seconds.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- =============================================================== -->
+<!-- ===== MONTH 1 ===== -->
+<!-- =============================================================== -->
+<section class="month-section" id="month1">
+    <div class="container">
+        <div class="month-banner m1">
+            <div class="month-label m1">Month 1 &mdash; Weeks 1 to 4</div>
+            <div class="month-title">Learn &amp; Understand</div>
+            <div class="month-desc">Your goal this month is simple: understand the entire ecosystem and prove you can contribute. By Week 4, you should be able to explain what every module does and have shipped real code.</div>
+            <div class="month-goal">&#127919; <strong>End-of-Month Goal:</strong>&nbsp; Module audit report + 3 merged PRs + presentation</div>
+            <div class="progress-wrap">
+                <div class="progress-labels"><span>Skill Level</span><span style="color:var(--accent-blue)">Beginner &rarr; Contributor</span></div>
+                <div class="progress-bar"><div class="progress-fill blue" style="width:33%"></div></div>
+            </div>
+        </div>
+
+        <!-- WEEK 1 -->
+        <div class="week-block open">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag blue">Week 1</span><span class="week-title">Onboarding &amp; Platform Understanding</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">By Friday, you should be able to <strong>run the project locally</strong>, <strong>explain what each of the 12+ modules does</strong> in one sentence, and have <strong>your first pull request merged</strong>.</div>
+                </div>
+
+                <table class="data-table">
+                    <thead><tr><th>Day</th><th>What You'll Do</th><th>Why It Matters</th><th>Deliverable</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="hl">Day 1</td>
+                            <td>Team introductions. Walk through AJ's Chalo Seekhen vision. Overview of all 12+ modules &mdash; what each one does, who it's for, and its current status.</td>
+                            <td>You can't build what you don't understand. This gives you the big picture before you touch code.</td>
+                            <td>Write a 1-line summary of each module</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Day 2</td>
+                            <td>Use LearnX V2.0 as a student. Go through Home, Dashboard, SPARK, Subjects, Daily Blueprint, Revision, Life Skills, Mastery Genome, Momentum, Connect.</td>
+                            <td>You're building for students. Experiencing the product as a user helps you think like one.</td>
+                            <td>Write 5 observations + 3 improvement ideas</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Day 3</td>
+                            <td>Install all tools: Node.js, Git, VS Code + extensions (ESLint, Prettier, Tailwind IntelliSense). Clone the repo. Install dependencies. Run locally.</td>
+                            <td>Your dev environment is your workspace. Getting it right on Day 3 saves you pain all month.</td>
+                            <td>Screenshot of localhost:3000 running</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Day 4</td>
+                            <td>Codebase walkthrough with your mentor. Understand: <code>/app</code> (routes), <code>/components</code> (UI), <code>/lib</code> (logic), <code>/supabase</code> (database). Trace one user flow end-to-end.</td>
+                            <td>Codebases can feel overwhelming. A guided tour with someone who knows it makes it approachable.</td>
+                            <td>Draw a simple diagram of how a feature flows from UI &rarr; API &rarr; Database</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Day 5</td>
+                            <td>Pick a small bug or UI improvement from the backlog. Create a branch, make the change, push, open a PR. Go through code review.</td>
+                            <td>Your first PR is a rite of passage. It proves you can work within the team's workflow.</td>
+                            <td>First PR opened and reviewed</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    <div class="tip-label">Tip for Success</div>
+                    <p>Take notes in a personal doc from Day 1. Write down unfamiliar terms, file paths you keep going back to, and questions you want to ask. This becomes your personal cheat sheet.</p>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 2 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag blue">Week 2</span><span class="week-title">Full-Stack Fundamentals</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">By Friday, you should be able to <strong>build a new page with dynamic routing</strong>, <strong>create a database table with Row Level Security</strong>, and <strong>deploy a preview to Vercel</strong>.</div>
+                </div>
+
+                <table class="data-table">
+                    <thead><tr><th>Topic</th><th>Hours</th><th>What You'll Learn (in plain English)</th><th>What You'll Build</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="hl">Next.js App Router</td>
+                            <td>10h</td>
+                            <td>How pages work in Next.js. How to create new routes by just adding files. How to show loading spinners. The difference between code that runs on the server vs. the browser.</td>
+                            <td>A multi-page module scaffold with a dynamic route like <code>/modules/[id]</code></td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Supabase Backend</td>
+                            <td>10h</td>
+                            <td>How to store data in tables. How to make sure users can only see their own data (Row Level Security). How to let users sign in. How to upload files.</td>
+                            <td>A simple CRUD feature: create, read, update, delete &mdash; where each user only sees their own data</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Tailwind CSS &amp; UI</td>
+                            <td>6h</td>
+                            <td>How to style elements using utility classes instead of writing CSS files. How to make layouts that work on phones and desktops.</td>
+                            <td>Pixel-perfect replica of an existing LearnX component</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">TypeScript</td>
+                            <td>6h</td>
+                            <td>How to add type annotations to JavaScript so bugs are caught before you even run the code. Think of it as "JavaScript with spell-check."</td>
+                            <td>Convert one JavaScript file to TypeScript with zero errors</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Git Workflow</td>
+                            <td>4h</td>
+                            <td>How to create feature branches, write meaningful commit messages, and handle code review feedback without losing work.</td>
+                            <td>Clean PR with 3+ well-written commits</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Deployment</td>
+                            <td>4h</td>
+                            <td>How to deploy your work so others can see it on a URL &mdash; not just your laptop. How environment variables work.</td>
+                            <td>Your branch running on a Vercel preview URL</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="real-note">
+                    <div class="note-label">Real-World Context</div>
+                    <p>In a real job, nobody will ask you to "build a React component." They'll say "the daily blueprint page is slow, fix it" or "add a new vocabulary card type." This week gives you the foundation to solve those real problems.</p>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 3 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag purple">Week 3</span><span class="week-title">Modules Deep Dive &mdash; Cluster A: Language &amp; Expression</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box purple">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Understand <strong>4 modules in depth</strong> &mdash; their purpose, their database design, and their user experience. Build <strong>one prototype component for each</strong>.</div>
+                </div>
+
+                <p style="color:var(--text-secondary);margin-bottom:1rem;font-size:0.9rem;">Think of modules as mini-products inside LearnX. Each one serves a different part of a student's growth. This week, you'll study the ones focused on <strong>language, self-awareness, culture, and wisdom</strong>.</p>
+
+                <div class="mod-grid">
+                    <div class="mod-card c-blue">
+                        <div class="mod-emoji">&#128483;&#65039;</div>
+                        <div class="mod-name">Vaani</div>
+                        <div class="mod-meaning">"Voice" &mdash; Vocabulary &amp; Communication</div>
+                        <div class="mod-explain">Helps students learn new words every day using a technique called <strong>spaced repetition</strong> (showing words right before you'd forget them). Think of it like Duolingo for vocabulary.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Database schema: words, user progress, streak tracking</li>
+                            <li>Vocabulary flashcard with flip animation</li>
+                            <li>API endpoint: <code>GET /api/vaani/daily-word</code></li>
+                            <li>Progress tracking (how many words learned)</li>
+                        </ul>
+                        <div class="mod-section-label">Skills Practiced</div>
+                        <div class="mod-tags"><span class="mod-tag">React State</span><span class="mod-tag">CSS Animations</span><span class="mod-tag">Supabase Queries</span><span class="mod-tag">API Design</span></div>
+                    </div>
+                    <div class="mod-card c-purple">
+                        <div class="mod-emoji">&#129695;</div>
+                        <div class="mod-name">Pratibimb</div>
+                        <div class="mod-meaning">"Reflection" &mdash; Self-Reflection &amp; Journaling</div>
+                        <div class="mod-explain">A guided journaling module where students write about their day, track their mood, and get AI-generated prompts to help them think deeper. Like a digital diary with intelligence built in.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Journal entry schema with tags and mood</li>
+                            <li>Rich text editor with basic formatting</li>
+                            <li>Mood selector (emoji-based, 5 levels)</li>
+                            <li>AI prompt generation using Claude API</li>
+                        </ul>
+                        <div class="mod-section-label">Skills Practiced</div>
+                        <div class="mod-tags"><span class="mod-tag">Rich Text</span><span class="mod-tag">AI Integration</span><span class="mod-tag">Form Handling</span><span class="mod-tag">Data Visualization</span></div>
+                    </div>
+                    <div class="mod-card c-orange">
+                        <div class="mod-emoji">&#129309;</div>
+                        <div class="mod-name">Sangam</div>
+                        <div class="mod-meaning">"Confluence" &mdash; Culture &amp; Unity</div>
+                        <div class="mod-explain">Teaches students about Indian festivals, traditions, and stories from different regions. Rich in multimedia &mdash; videos, audio, images. Think of it as a cultural encyclopedia for kids.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Content taxonomy (regions, festivals, themes)</li>
+                            <li>Multimedia content card (video + audio + text)</li>
+                            <li>Regional filter and search functionality</li>
+                            <li>Content management schema in Supabase</li>
+                        </ul>
+                        <div class="mod-section-label">Skills Practiced</div>
+                        <div class="mod-tags"><span class="mod-tag">CMS Design</span><span class="mod-tag">Media Handling</span><span class="mod-tag">Search &amp; Filter</span><span class="mod-tag">Schema Design</span></div>
+                    </div>
+                    <div class="mod-card c-cyan">
+                        <div class="mod-emoji">&#128214;</div>
+                        <div class="mod-name">Guru</div>
+                        <div class="mod-meaning">"Teacher" &mdash; Wisdom &amp; Moral Stories</div>
+                        <div class="mod-explain">Story-based learning where students read tales with moral lessons, explore character studies, and face ethical dilemma scenarios. Like a choose-your-own-adventure book with life lessons.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Story schema (chapters, morals, characters)</li>
+                            <li>Interactive story reader with progress</li>
+                            <li>"Moral of the story" summary card</li>
+                            <li>Ethical dilemma quiz component</li>
+                        </ul>
+                        <div class="mod-section-label">Skills Practiced</div>
+                        <div class="mod-tags"><span class="mod-tag">Storytelling UI</span><span class="mod-tag">Progress Tracking</span><span class="mod-tag">Quiz Logic</span><span class="mod-tag">Reading UX</span></div>
+                    </div>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 4 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag purple">Week 4</span><span class="week-title">Modules Deep Dive &mdash; Cluster B: Skills &amp; Growth</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box purple">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Study <strong>4 more modules</strong> focused on project building, assessments, peer learning, and habits. Prepare your <strong>Month 1 audit report and presentation</strong>.</div>
+                </div>
+
+                <div class="mod-grid">
+                    <div class="mod-card c-green">
+                        <div class="mod-emoji">&#127959;&#65039;</div>
+                        <div class="mod-name">Nirmaan</div>
+                        <div class="mod-meaning">"Creation" &mdash; Project-Based Learning</div>
+                        <div class="mod-explain">Students propose real projects, set milestones, build them with mentor guidance, and present results. Like a mini-hackathon that runs continuously.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Project submission wizard (multi-step form)</li>
+                            <li>Milestone tracker with timeline view</li>
+                            <li>File upload for deliverables</li>
+                            <li>Mentor review &amp; feedback component</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Multi-step Forms</span><span class="mod-tag">File Upload</span><span class="mod-tag">Timeline UI</span></div>
+                    </div>
+                    <div class="mod-card c-pink">
+                        <div class="mod-emoji">&#129504;</div>
+                        <div class="mod-name">Prajna</div>
+                        <div class="mod-meaning">"Wisdom" &mdash; Adaptive Assessment</div>
+                        <div class="mod-explain">An assessment engine where question difficulty adjusts based on how the student is performing. Get one right? Next one's harder. Get one wrong? It backs off. Like a smart tutor.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Question bank schema (MCQ, fill-in-blank, matching)</li>
+                            <li>Quiz interface with timer &amp; progress bar</li>
+                            <li>Adaptive difficulty algorithm</li>
+                            <li>Results dashboard with per-question breakdown</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Quiz Engine</span><span class="mod-tag">Algorithms</span><span class="mod-tag">Analytics</span></div>
+                    </div>
+                    <div class="mod-card c-yellow">
+                        <div class="mod-emoji">&#129308;&#129307;</div>
+                        <div class="mod-name">Mitra</div>
+                        <div class="mod-meaning">"Friend" &mdash; Peer Learning</div>
+                        <div class="mod-explain">Connects students with similar interests and goals for collaborative learning. Study groups, peer teaching, shared problem-solving. Like finding your study buddy automatically.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Peer matching algorithm (interests, level)</li>
+                            <li>Study group creation with real-time updates</li>
+                            <li>Discussion thread component</li>
+                            <li>Peer profile cards</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Realtime</span><span class="mod-tag">Matching Logic</span><span class="mod-tag">Collaboration</span></div>
+                    </div>
+                    <div class="mod-card c-red">
+                        <div class="mod-emoji">&#9878;&#65039;</div>
+                        <div class="mod-name">Karma</div>
+                        <div class="mod-meaning">"Action" &mdash; Discipline &amp; Values</div>
+                        <div class="mod-explain">A habit tracker that helps students build discipline through daily streaks, value challenges, and character development. Like a GitHub contribution grid, but for personal growth.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Habit tracker with streak calendar (heatmap grid)</li>
+                            <li>Daily value challenge card</li>
+                            <li>Streak calculation + notification triggers</li>
+                            <li>Character development score dashboard</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Streak Logic</span><span class="mod-tag">Heatmap UI</span><span class="mod-tag">Gamification</span></div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem;">
+                    <h4 style="font-weight:700;margin-bottom:0.75rem;">Month 1 Deliverables</h4>
+                    <ul class="checklist">
+                        <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>Module Audit Report</strong><span class="sub">Written report covering all 8 modules studied &mdash; what exists, what's missing, your recommendations. Include database schema proposals.</span></div></li>
+                        <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>15-Minute Presentation</strong><span class="sub">Demo your prototypes from Weeks 3&ndash;4. Explain your design decisions. Show code. Get team feedback.</span></div></li>
+                        <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>3+ Pull Requests Merged</strong><span class="sub">Real contributions to the codebase. Clean code, meaningful commit messages, review feedback addressed.</span></div></li>
+                    </ul>
+                </div>
+            </div></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- =============================================================== -->
+<!-- ===== MONTH 2 ===== -->
+<!-- =============================================================== -->
+<section class="month-section" id="month2">
+    <div class="container">
+        <div class="month-banner m2">
+            <div class="month-label m2">Month 2 &mdash; Weeks 5 to 8</div>
+            <div class="month-title">Build &amp; Ship</div>
+            <div class="month-desc">You've learned the ecosystem. Now it's time to build. This month you'll study the remaining modules, explore sub-products, and own your first full feature from spec to deployment.</div>
+            <div class="month-goal">&#127919; <strong>End-of-Month Goal:</strong>&nbsp; Full-stack feature deployed to staging + sub-product contribution</div>
+            <div class="progress-wrap">
+                <div class="progress-labels"><span>Skill Level</span><span style="color:var(--accent-purple)">Contributor &rarr; Builder</span></div>
+                <div class="progress-bar"><div class="progress-fill purple" style="width:66%"></div></div>
+            </div>
+        </div>
+
+        <!-- WEEK 5 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag pink">Week 5</span><span class="week-title">Modules Deep Dive &mdash; Cluster C: Achievement &amp; Leadership</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box purple">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Complete your knowledge of <strong>all 12 modules</strong> by studying the final 4: structured courses, financial literacy, focused practice, and leadership training.</div>
+                </div>
+
+                <div class="mod-grid">
+                    <div class="mod-card c-blue">
+                        <div class="mod-emoji">&#128218;</div>
+                        <div class="mod-name">Shikha</div>
+                        <div class="mod-meaning">"Summit" &mdash; Structured Courses</div>
+                        <div class="mod-explain">A course builder where content creators can structure lessons into sections, add videos, notes, and quizzes. Students progress through courses and earn certificates. Like Udemy built for schools.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Course schema: course &rarr; sections &rarr; lessons &rarr; content blocks</li>
+                            <li>Course catalog page with search &amp; filters</li>
+                            <li>Lesson player (video + notes + quiz)</li>
+                            <li>Certificate generation on completion</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Course Builder</span><span class="mod-tag">Video Player</span><span class="mod-tag">PDF Generation</span></div>
+                    </div>
+                    <div class="mod-card c-green">
+                        <div class="mod-emoji">&#128176;</div>
+                        <div class="mod-name">Artha</div>
+                        <div class="mod-meaning">"Wealth" &mdash; Financial Literacy</div>
+                        <div class="mod-explain">Age-appropriate financial education &mdash; budgeting, saving, earning concepts. Includes interactive simulators where students can practice managing money. Like a financial sandbox for kids.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Budget calculator widget</li>
+                            <li>Savings goal tracker with visual progress</li>
+                            <li>"Earn &amp; Spend" simulation game</li>
+                            <li>Financial literacy quiz</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Calculator Logic</span><span class="mod-tag">Game Simulation</span><span class="mod-tag">Charts</span></div>
+                    </div>
+                    <div class="mod-card c-orange">
+                        <div class="mod-emoji">&#127947;&#65039;</div>
+                        <div class="mod-name">Prayas</div>
+                        <div class="mod-meaning">"Effort" &mdash; Practice Engine</div>
+                        <div class="mod-explain">Focused practice with question banks organized by topic and difficulty. Timed sessions, detailed analytics, and automatic identification of weak areas. Like a gym for your brain.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Practice session launcher (topic, difficulty, count)</li>
+                            <li>Timed quiz view with question navigator</li>
+                            <li>Detailed results with per-question breakdown</li>
+                            <li>Weak-area identification algorithm</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Question Bank</span><span class="mod-tag">Timer Logic</span><span class="mod-tag">Analytics</span></div>
+                    </div>
+                    <div class="mod-card c-purple">
+                        <div class="mod-emoji">&#128081;</div>
+                        <div class="mod-name">Netritva</div>
+                        <div class="mod-meaning">"Leadership" &mdash; Leadership Skills</div>
+                        <div class="mod-explain">Scenario-based leadership training through decision trees, team simulations, and scoring rubrics. Students face realistic situations and see how their choices play out. Like a leadership flight simulator.</div>
+                        <div class="mod-section-label">What You'll Build</div>
+                        <ul class="mod-tasks">
+                            <li>Decision tree interactive component</li>
+                            <li>Leadership challenge with scoring rubric</li>
+                            <li>Team simulation mini-game</li>
+                            <li>Leadership profile dashboard</li>
+                        </ul>
+                        <div class="mod-tags"><span class="mod-tag">Decision Trees</span><span class="mod-tag">Branching Logic</span><span class="mod-tag">Rubric Scoring</span></div>
+                    </div>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 6 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag pink">Week 6</span><span class="week-title">Sub-Products: GroerX, Santulan AI &amp; AJ's Bazaar</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box purple">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Go beyond LearnX modules. Understand the <strong>3 major sub-products</strong>, how they connect to the main platform, and <strong>make at least 1 meaningful contribution</strong> to one of them.</div>
+                </div>
+
+                <table class="data-table">
+                    <thead><tr><th>Sub-Product</th><th>What It Is (Simple Explanation)</th><th>Your Full-Stack Tasks</th><th>Time</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="hl">&#127918; GroerX<br><small style="color:var(--text-muted)">Gamified Growth</small></td>
+                            <td>A layer that makes learning fun by adding XP points, badges, levels, and leaderboards across all modules. Like how games keep you hooked &mdash; but for education.</td>
+                            <td><strong>Backend:</strong> XP calculation logic, badge trigger system, leaderboard queries<br><strong>Frontend:</strong> Animated XP bar, badge showcase, leaderboard with real-time updates<br><strong>Deliverable:</strong> Add a new achievement type end-to-end</td>
+                            <td>12h</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">&#129302; Santulan AI<br><small style="color:var(--text-muted)">Personalized Learning</small></td>
+                            <td>AI that understands each student and creates personalized recommendations. "You're struggling with fractions? Let's practice those. You love science stories? Here are more." Like Netflix recommendations for learning.</td>
+                            <td><strong>Backend:</strong> Claude API integration, prompt templates, recommendation algorithm<br><strong>Frontend:</strong> AI chat interface, personalized suggestion cards<br><strong>Deliverable:</strong> 5 tested prompts + working API endpoint</td>
+                            <td>12h</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">&#128722; AJ's Bazaar<br><small style="color:var(--text-muted)">Hyperlocal Marketplace</small></td>
+                            <td>A Zepto/Blinkit-style marketplace for Mhow city &mdash; local shopkeepers list products, customers order with UPI or cash on delivery. Includes vegetable pre-booking.</td>
+                            <td><strong>Backend:</strong> Order management schema, payment status webhooks<br><strong>Frontend:</strong> Product listing, cart, checkout flow<br><strong>Deliverable:</strong> Architecture review + 3 improvement suggestions</td>
+                            <td>8h</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="real-note">
+                    <div class="note-label">Why Sub-Products Matter</div>
+                    <p>In a startup, you don't just work on "your" product. The team is small, so you'll be asked to jump into different codebases. This week trains you to quickly understand unfamiliar code and contribute.</p>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 7-8 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag orange">Weeks 7&ndash;8</span><span class="week-title">Feature Development Sprint (2 Weeks)</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box orange">
+                    <div class="goal-box-label">&#127919; Sprint Goal</div>
+                    <div class="goal-box-text">This is the most important 2 weeks of Month 2. You will <strong>own a complete feature from idea to deployment</strong>. You'll write the spec, design the database, build the UI, write tests, and deploy it live.</div>
+                </div>
+
+                <h4 style="font-weight:700;margin-bottom:0.75rem;">Your 10-Day Sprint</h4>
+                <div class="sprint-timeline" style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;">
+                    <div class="sprint-day"><div class="sprint-day-label">Days 1&ndash;2</div><div class="sprint-day-content"><strong>Plan &amp; Spec</strong> &mdash; Write a 1-page document: What problem does this solve? Who is it for? What's the database schema? What are the API endpoints? What does the UI look like? What could go wrong?</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Day 3</div><div class="sprint-day-content"><strong>Design Review</strong> &mdash; Present your spec to your mentor. Get approval before writing any code. Create wireframes (pen-and-paper is fine). This prevents you from building the wrong thing.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Days 4&ndash;5</div><div class="sprint-day-content"><strong>Build Backend</strong> &mdash; Create database tables, write Row Level Security policies, build API routes or Server Actions, add input validation with Zod. Test every endpoint manually.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Days 6&ndash;7</div><div class="sprint-day-content"><strong>Build Frontend</strong> &mdash; Create React components, connect them to your APIs, handle loading/error/empty states, make everything responsive (works on phone + desktop).</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Day 8</div><div class="sprint-day-content"><strong>Test &amp; Integrate</strong> &mdash; Connect everything together. Test the full user flow. Fix edge cases. Write automated tests. Try to break your own feature.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Day 9</div><div class="sprint-day-content"><strong>Code Review</strong> &mdash; Open a pull request. Respond to feedback. Refactor where needed. Have another intern review your code too.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Day 10</div><div class="sprint-day-content"><strong>Deploy &amp; Demo</strong> &mdash; Deploy to Vercel staging. Give a 10-minute live demo to the team. Collect feedback. Merge to main branch if approved.</div></div>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-label">Pro Tip</div>
+                    <p>The spec is the most important part. Many junior developers start coding immediately and then realize halfway through that they built the wrong thing. Spending 2 days planning saves you 5 days of rework.</p>
+                </div>
+
+                <h4 style="font-weight:700;margin:1.5rem 0 0.75rem;">Sprint Quality Checklist</h4>
+                <ul class="checklist">
+                    <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>Database schema + RLS policies</strong><span class="sub">Tables created, relations defined, users can only access their own data</span></div></li>
+                    <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>API layer with validation</strong><span class="sub">All inputs validated with Zod. Proper error responses (not just 500 errors).</span></div></li>
+                    <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>Responsive UI with all states</strong><span class="sub">Works on mobile &amp; desktop. Shows loading spinners, error messages, and empty states.</span></div></li>
+                    <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>TypeScript &mdash; zero "any"</strong><span class="sub">Every variable and function is properly typed. No shortcuts.</span></div></li>
+                    <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>Automated tests</strong><span class="sub">At least unit tests for core logic and one integration test for the API.</span></div></li>
+                    <li class="check-item"><div class="check-box" onclick="this.classList.toggle('done')"></div><div class="check-label"><strong>Deployed &amp; demo'd</strong><span class="sub">Live on a Vercel preview URL. Team has seen it work.</span></div></li>
+                </ul>
+            </div></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- =============================================================== -->
+<!-- ===== MONTH 3 ===== -->
+<!-- =============================================================== -->
+<section class="month-section" id="month3">
+    <div class="container">
+        <div class="month-banner m3">
+            <div class="month-label m3">Month 3 &mdash; Weeks 9 to 12</div>
+            <div class="month-title">Own &amp; Master</div>
+            <div class="month-desc">You've learned and you've built. Now it's time to think like an engineer &mdash; connect systems, optimize performance, handle edge cases, and deliver a capstone project that proves you can own a module.</div>
+            <div class="month-goal">&#127919; <strong>End-of-Month Goal:</strong>&nbsp; Capstone project + handoff documentation + final presentation</div>
+            <div class="progress-wrap">
+                <div class="progress-labels"><span>Skill Level</span><span style="color:var(--accent-green)">Builder &rarr; Owner</span></div>
+                <div class="progress-bar"><div class="progress-fill green" style="width:100%"></div></div>
+            </div>
+        </div>
+
+        <!-- WEEK 9 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag green">Week 9</span><span class="week-title">Cross-Module Integration</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box green">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Until now, you've worked on modules individually. This week, you'll <strong>connect modules to each other</strong> through shared systems like Mastery Genome, Momentum, Daily Blueprint, and SPARK.</div>
+                </div>
+
+                <p style="color:var(--text-secondary);margin-bottom:1rem;font-size:0.9rem;">The real power of LearnX isn't any single module &mdash; it's how they all feed into a unified student experience. Here's how they connect:</p>
+
+                <table class="data-table">
+                    <thead><tr><th>System</th><th>What It Does (Simply)</th><th>What You'll Build</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="hl">Mastery Genome</td>
+                            <td>Combines progress from all modules into one visual "DNA" of the student &mdash; a radar chart showing strengths and areas to improve across every dimension.</td>
+                            <td><strong>Backend:</strong> Aggregation queries across all module tables, weighted scoring<br><strong>Frontend:</strong> Radar/spider chart with drill-down per module</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Momentum Engine</td>
+                            <td>Real-time activity feed + engagement score. Shows students they're making progress and keeps them motivated. Like a "You're on fire!" tracker.</td>
+                            <td><strong>Backend:</strong> Cross-module event logging, momentum score calculation<br><strong>Frontend:</strong> Activity feed, animated momentum meter</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">Daily Blueprint</td>
+                            <td>A personalized to-do list that pulls tasks from multiple modules based on the student's goals, time available, and what they're behind on.</td>
+                            <td><strong>Backend:</strong> Task aggregation API, smart priority algorithm<br><strong>Frontend:</strong> Daily planner with drag-to-reorder</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">SPARK Framework</td>
+                            <td>Maps every module activity to 5 dimensions: Skills, Practice, Achievement, Reflection, Knowledge. Ensures students develop holistically.</td>
+                            <td><strong>Backend:</strong> SPARK tagging system for all modules<br><strong>Frontend:</strong> SPARK dashboard with per-dimension breakdown</td>
+                        </tr>
+                        <tr>
+                            <td class="hl">GroerX Triggers</td>
+                            <td>Every action across all modules can trigger XP, badges, and leaderboard updates. Completing a Vaani word = +10 XP. Finishing a Shikha course = Gold Badge.</td>
+                            <td><strong>Backend:</strong> Event-driven XP triggers, badge condition evaluator<br><strong>Frontend:</strong> XP toast notifications, badge unlock animations</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="real-note">
+                    <div class="note-label">Why This Matters in the Real World</div>
+                    <p>Most software isn't a single feature &mdash; it's many features that need to work together. Learning to integrate systems is one of the most valuable skills you'll gain here. At any tech company, the engineer who can connect the dots between systems is the one who gets promoted.</p>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 10 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag green">Week 10</span><span class="week-title">Advanced Full-Stack Topics</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box green">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Level up from "it works" to "it works <strong>fast, securely, and for everyone</strong>." These are the skills that separate junior developers from mid-level engineers.</div>
+                </div>
+
+                <table class="data-table">
+                    <thead><tr><th>Topic</th><th>Hours</th><th>What It Means (Simply)</th><th>What You'll Do</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">Performance</td><td>6h</td><td>Making pages load fast. A slow page = students leave. We use Lighthouse scores (like a health check for websites) to measure this.</td><td>Get one module page to score &gt; 90 on Lighthouse</td></tr>
+                        <tr><td class="hl">Edge Functions</td><td>5h</td><td>Code that runs on Supabase's servers, not in the browser. Used for things like calculating daily streaks, sending notifications, or running scheduled tasks.</td><td>Build an Edge Function that calculates daily streaks</td></tr>
+                        <tr><td class="hl">AI Integration</td><td>6h</td><td>Using Claude's AI to add smart features &mdash; generating study plans, summarizing journals, creating personalized quiz questions.</td><td>Build an AI-powered study plan generator</td></tr>
+                        <tr><td class="hl">Analytics</td><td>5h</td><td>Tracking what users actually do &mdash; which features they use, where they drop off, what's broken. Without this, you're guessing.</td><td>Implement event tracking for one complete user flow</td></tr>
+                        <tr><td class="hl">Accessibility (a11y)</td><td>4h</td><td>Making the app usable by everyone, including people who use screen readers, can't use a mouse, or have color blindness.</td><td>Audit and fix 3 components for accessibility</td></tr>
+                        <tr><td class="hl">Mobile / PWA</td><td>4h</td><td>Making the app work offline and feel like a native app on phones. PWA = Progressive Web App. Students can "install" it on their home screen.</td><td>Make one module fully PWA-ready</td></tr>
+                        <tr><td class="hl">Security</td><td>4h</td><td>Preventing hackers from stealing data, injecting malicious code, or accessing other users' information. The #1 rule: never trust user input.</td><td>Security audit your Month 2 feature</td></tr>
+                        <tr><td class="hl">Testing</td><td>4h</td><td>Writing code that automatically tests your other code. Catches bugs before users do. Think of it as "future-proofing" your work.</td><td>Write an end-to-end test for one complete user flow</td></tr>
+                    </tbody>
+                </table>
+            </div></div>
+        </div>
+
+        <!-- WEEK 11 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag cyan">Week 11</span><span class="week-title">Capstone Project</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box green">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Deliver your <strong>capstone project</strong> &mdash; a significant end-to-end feature that showcases everything you've learned. This is your portfolio piece and the highlight of your internship.</div>
+                </div>
+
+                <h4 style="font-weight:700;margin-bottom:0.75rem;">How You'll Be Graded</h4>
+                <table class="data-table">
+                    <thead><tr><th>Criteria</th><th>Weight</th><th>What We're Looking For</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">Feature Completeness</td><td>25%</td><td>Does the full user flow work? DB, API, UI, error handling, edge cases &mdash; nothing half-done.</td></tr>
+                        <tr><td class="hl">Code Quality</td><td>25%</td><td>Clean TypeScript, proper error handling, tests written, follows project conventions. No console.logs left behind.</td></tr>
+                        <tr><td class="hl">UI/UX Polish</td><td>20%</td><td>Responsive design, smooth animations, loading states, consistent with the design system. Feels professional.</td></tr>
+                        <tr><td class="hl">Documentation</td><td>15%</td><td>README, API docs, database schema diagram, setup instructions. Could someone new pick up where you left off?</td></tr>
+                        <tr><td class="hl">Presentation</td><td>15%</td><td>Can you clearly explain the problem, your solution, trade-offs you made, and what you'd do differently?</td></tr>
+                    </tbody>
+                </table>
+
+                <h4 style="font-weight:700;margin:1.5rem 0 0.75rem;">Capstone Ideas (Pick One or Propose Your Own)</h4>
+                <ul class="checklist">
+                    <li class="check-item"><div class="check-label"><strong>AI-Powered Daily Blueprint</strong><span class="sub">Use Claude API to generate personalized daily study plans based on Mastery Genome data, pending tasks, and learning patterns</span></div></li>
+                    <li class="check-item"><div class="check-label"><strong>Real-time Peer Study Rooms (Mitra)</strong><span class="sub">Supabase Realtime for live collaboration with shared notes, chat, and presence indicators</span></div></li>
+                    <li class="check-item"><div class="check-label"><strong>Adaptive Practice Engine (Prayas + Prajna)</strong><span class="sub">Algorithm that adjusts question difficulty in real-time based on student's rolling performance</span></div></li>
+                    <li class="check-item"><div class="check-label"><strong>Gamified Leadership Simulator (Netritva + GroerX)</strong><span class="sub">Interactive branching scenario engine with scoring rubric and XP integration</span></div></li>
+                    <li class="check-item"><div class="check-label"><strong>Cross-Module Analytics Dashboard</strong><span class="sub">Admin view aggregating engagement, completion, and weak areas across all 12 modules with charts</span></div></li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-label">How to Choose</div>
+                    <p>Pick the one that excites you most AND plays to your strengths. If you love frontend, go for the Study Rooms or Dashboard. If you love algorithms, go for the Adaptive Engine. If you love AI, go for the Daily Blueprint. Your best work comes from genuine interest.</p>
+                </div>
+            </div></div>
+        </div>
+
+        <!-- WEEK 12 -->
+        <div class="week-block">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-left"><span class="week-tag cyan">Week 12</span><span class="week-title">Handoff, Demo &amp; Graduation</span></div>
+                <span class="week-chevron">&#9662;</span>
+            </div>
+            <div class="week-content"><div class="week-body">
+                <div class="goal-box green">
+                    <div class="goal-box-label">&#127919; Week Goal</div>
+                    <div class="goal-box-text">Your final week. <strong>Document everything, transfer knowledge, present your work, and celebrate.</strong> Leave the codebase better than you found it.</div>
+                </div>
+
+                <div class="sprint-timeline" style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;">
+                    <div class="sprint-day"><div class="sprint-day-label">Monday</div><div class="sprint-day-content"><strong>Documentation Day</strong> &mdash; Write comprehensive handoff docs for all code you've written. Include: how to set it up, known issues, what you'd improve next, and why you made key design decisions.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Tuesday</div><div class="sprint-day-content"><strong>Knowledge Transfer</strong> &mdash; 1-hour recorded session with the engineering team. Walk through your code, explain your architecture, answer questions. This recording becomes a resource for future interns.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Wednesday</div><div class="sprint-day-content"><strong>Final Demo</strong> &mdash; 20-minute presentation to founders, engineers, and product team. Show your capstone + all contributions. Include a "what I learned" section. Q&amp;A.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Thursday</div><div class="sprint-day-content"><strong>Retrospective</strong> &mdash; Share what worked well, what was confusing, what you'd change about the program. We use your feedback to improve for the next batch of interns.</div></div>
+                    <div class="sprint-day"><div class="sprint-day-label">Friday</div><div class="sprint-day-content"><strong>Graduation</strong> &mdash; Certificate of completion. Written performance review with specific strengths and growth areas. Discussion about potential full-time role or continued collaboration.</div></div>
+                </div>
+            </div></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== EVALUATION ===== -->
+<section class="section" id="evaluation">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label green">Assessment</div>
+            <h2 class="section-title">How You'll Be Evaluated</h2>
+            <p class="section-desc">No surprise tests. Here's exactly what's expected at the end of each month.</p>
+        </div>
+
+        <div class="eval-grid">
+            <div class="eval-card m1">
+                <div class="eval-label m1">Month 1 End</div>
+                <div class="eval-title">Can You Navigate &amp; Contribute?</div>
+                <ul class="eval-list">
+                    <li>&#128196; Module audit report covering all modules studied</li>
+                    <li>&#128187; Local dev environment fully working</li>
+                    <li>&#128256; 3+ pull requests merged with clean review history</li>
+                    <li>&#127908; 15-minute presentation with prototypes</li>
+                    <li>&#128161; Can explain any user flow: UI &rarr; API &rarr; Database</li>
+                    <li>&#9989; <strong>Pass criteria:</strong> Understands the ecosystem and ships code independently</li>
+                </ul>
+            </div>
+            <div class="eval-card m2">
+                <div class="eval-label m2">Month 2 End</div>
+                <div class="eval-title">Can You Build &amp; Ship?</div>
+                <ul class="eval-list">
+                    <li>&#128640; Full-stack feature deployed to staging</li>
+                    <li>&#11088; Code review score &ge; 7/10</li>
+                    <li>&#127918; At least 1 sub-product contribution</li>
+                    <li>&#128203; Feature spec + wireframes + documentation</li>
+                    <li>&#129514; Automated tests for your feature</li>
+                    <li>&#9989; <strong>Pass criteria:</strong> Can independently spec, build, test, and deploy a feature</li>
+                </ul>
+            </div>
+            <div class="eval-card m3">
+                <div class="eval-label m3">Month 3 End</div>
+                <div class="eval-title">Can You Own a Module?</div>
+                <ul class="eval-list">
+                    <li>&#127942; Capstone project delivered end-to-end</li>
+                    <li>&#128279; Cross-module integration working</li>
+                    <li>&#128200; Performance, security, or a11y improvements shipped</li>
+                    <li>&#128218; Complete handoff documentation</li>
+                    <li>&#127908; Final demo presented to stakeholders</li>
+                    <li>&#9989; <strong>Pass criteria:</strong> Can own a module end-to-end with minimal guidance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== DAILY SCHEDULE ===== -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label orange">Daily Life</div>
+            <h2 class="section-title">A Typical Day</h2>
+            <p class="section-desc">Structured enough to keep you productive, flexible enough to let you go deep when you're in the zone.</p>
+        </div>
+
+        <div class="schedule">
+            <div class="schedule-row"><div class="schedule-time">09:00&ndash;09:15</div><div class="schedule-act"><strong>Standup</strong> &mdash; Share: what you did yesterday, what you'll do today, anything blocking you</div></div>
+            <div class="schedule-row"><div class="schedule-time">09:15&ndash;11:00</div><div class="schedule-act"><strong>Deep Work 1</strong> &mdash; Your most focused coding time. No meetings. No Slack. Just build.</div></div>
+            <div class="schedule-row"><div class="schedule-time">11:00&ndash;11:30</div><div class="schedule-act"><strong>Code Review</strong> &mdash; Review peers' PRs or address feedback on yours. Learn from others' code.</div></div>
+            <div class="schedule-row"><div class="schedule-time">11:30&ndash;12:30</div><div class="schedule-act"><strong>Learning</strong> &mdash; Tutorials, docs, or tech talks. Self-paced or guided by your mentor.</div></div>
+            <div class="schedule-row"><div class="schedule-time">12:30&ndash;13:30</div><div class="schedule-act"><strong>Lunch Break</strong> &mdash; Step away from the screen. Really.</div></div>
+            <div class="schedule-row"><div class="schedule-time">13:30&ndash;15:30</div><div class="schedule-act"><strong>Deep Work 2</strong> &mdash; Continue building. Pair with your mentor if you're stuck.</div></div>
+            <div class="schedule-row"><div class="schedule-time">15:30&ndash;16:00</div><div class="schedule-act"><strong>1-on-1 / Review</strong> &mdash; Weekly mentor check-in or module review session.</div></div>
+            <div class="schedule-row"><div class="schedule-time">16:00&ndash;17:30</div><div class="schedule-act"><strong>Deep Work 3</strong> &mdash; Finish tasks, write docs, clean up code. Prepare tomorrow's plan.</div></div>
+            <div class="schedule-row"><div class="schedule-time">17:30&ndash;18:00</div><div class="schedule-act"><strong>Wrap-up</strong> &mdash; Push code, update task tracker, write your daily log (3 sentences max).</div></div>
+        </div>
+
+        <div class="tip-box" style="max-width:700px;margin:1.5rem auto 0;">
+            <div class="tip-label">About "Deep Work"</div>
+            <p>Deep work means uninterrupted focus. Close Slack, put your phone away, and work on one thing. 90 minutes of deep work beats 4 hours of distracted work. If you get stuck for more than 30 minutes, ask for help &mdash; that's not giving up, that's being smart.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== RITUALS ===== -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label purple">Ceremonies</div>
+            <h2 class="section-title">Weekly Rituals</h2>
+            <p class="section-desc">These recurring events keep you on track, connected with the team, and constantly improving.</p>
+        </div>
+
+        <div class="ritual-grid">
+            <div class="ritual-card"><div class="ritual-freq">Daily</div><div class="ritual-name">Standup</div><div class="ritual-detail">15 min &mdash; Yesterday, today, blockers. Keep it short. Can be async via Slack thread.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Daily</div><div class="ritual-name">Daily Log</div><div class="ritual-detail">5 min &mdash; 3 sentences max: What you built. What you learned. What's next. Helps your future self.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Weekly</div><div class="ritual-name">Module Review</div><div class="ritual-detail">1 hour &mdash; Deep dive into one module with the team. Architecture, edge cases, what could be better.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Weekly</div><div class="ritual-name">1-on-1 with Mentor</div><div class="ritual-detail">30 min &mdash; Not just code. Career goals, what you're struggling with, feedback in both directions.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Weekly</div><div class="ritual-name">Code Review Session</div><div class="ritual-detail">1 hour &mdash; Review each other's code as a group. You'll learn more from reading code than writing it.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Bi-Weekly</div><div class="ritual-name">Intern Tech Talk</div><div class="ritual-detail">45 min &mdash; You teach something you learned. Best way to deeply understand a topic is to explain it.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Monthly</div><div class="ritual-name">Demo Day</div><div class="ritual-detail">2 hours &mdash; Show everything you built this month. Celebrate wins. Get stakeholder feedback.</div></div>
+            <div class="ritual-card"><div class="ritual-freq">Monthly</div><div class="ritual-name">Retrospective</div><div class="ritual-detail">1 hour &mdash; What worked, what didn't, what to change. Your honest feedback makes the program better.</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label blue">FAQ</div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-desc">Real questions from past interns. Read these before Day 1.</p>
+        </div>
+
+        <div style="max-width:800px;margin:0 auto;">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">What if I don't know React or TypeScript yet?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">That's completely fine. Week 2 is specifically designed to teach you the full tech stack from the ground up. We only require basic HTML/CSS/JavaScript knowledge. Many successful interns started without React experience. What matters most is your willingness to learn quickly and ask questions.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">How much coding will I do vs. learning?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">Month 1 is roughly 50% learning, 50% coding. Month 2 flips to 20% learning, 80% coding. Month 3 is almost entirely coding and building. We front-load the learning so you can be productive for the majority of the internship. Even the "learning" parts involve writing code &mdash; we don't do passive lectures.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">What if I get stuck on something?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">The 30-minute rule: try to solve it yourself for 30 minutes. Google it, read docs, try different approaches. If you're still stuck after 30 minutes, ask your mentor or post in the team chat. Getting stuck is normal. Staying stuck silently for days is not. Nobody will judge you for asking questions &mdash; we'll judge you for not asking.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Will I work on real production code?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">Yes. From Week 1, you'll be working in the same codebase that powers the live product. Your code goes through the same code review process as everyone else's. By Month 2, your features will be deployed to real users. This isn't a sandbox &mdash; it's the real thing.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">What happens after the 3 months?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">Three possible outcomes: (1) A full-time job offer if you've performed well and we have an open position. (2) An extended internship or part-time collaboration. (3) A strong reference letter and a portfolio project you can show to any employer. We're transparent about this from Day 1.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">What if I fall behind the schedule?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">The schedule is a guide, not a rigid deadline. Some weeks you'll move faster, some slower. Your weekly 1-on-1 with your mentor is specifically for recalibrating. If you're consistently behind, we'll adjust the scope &mdash; not the timeline. What matters is steady progress and honest communication, not hitting every checkbox on Day X.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Do I need my own laptop?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">Yes, you'll need a laptop that can run Node.js, VS Code, and a modern browser. 8GB RAM minimum, 16GB recommended. Any operating system works (Windows, Mac, or Linux). If hardware is a constraint, let us know early &mdash; we may be able to help.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Is this remote or on-site?<span class="faq-chevron">&#9662;</span></div>
+                <div class="faq-a"><div class="faq-a-inner">We'll confirm the format during your offer discussion. Both modes work, but on-site interns typically ramp up faster due to in-person pair programming and whiteboard sessions. Remote interns need to be extra proactive about communication.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p><span class="brand">AJ's Chalo Seekhen</span></p>
+    <p style="margin-top:0.3rem;">Full-Stack Intern Training Program &mdash; 2026</p>
+    <p style="margin-top:0.75rem;font-size:0.76rem;color:var(--text-muted);">Built with care for the next generation of engineers.</p>
+</footer>
+
+<script>
+function toggleWeek(el) {
+    el.closest('.week-block').classList.toggle('open');
+}
+function toggleFaq(el) {
+    el.closest('.faq-item').classList.toggle('open');
+}
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
+
+// Mobile nav
+document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Active nav link
+const sects = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    sects.forEach(s => { if (scrollY >= s.offsetTop - 100) cur = s.id; });
+    links.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    });
+});
+
+// Animate progress bars on scroll
+const pObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            const f = e.target.querySelector('.progress-fill');
+            if (f) { const w = f.style.width; f.style.width = '0%'; setTimeout(() => f.style.width = w, 150); }
+        }
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('.progress-wrap').forEach(el => pObs.observe(el));
+</script>
+</body>
+</html>
