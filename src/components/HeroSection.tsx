@@ -28,7 +28,7 @@ export default function HeroSection() {
         <h1 className="text-[48px] md:text-[72px] lg:text-[86px] font-bold tracking-[-0.04em] leading-[1] text-[#1d1d1f] mb-3">
           AJ&apos;s Chalo Seekhen
         </h1>
-        <h2 className="text-[24px] md:text-[36px] font-semibold tracking-[-0.02em] leading-[1.2] bg-gradient-to-r from-[#4f46e5] via-[#7c3aed] to-[#ec4899] bg-clip-text text-transparent mb-6">
+        <h2 className="text-[24px] md:text-[36px] font-semibold tracking-[-0.02em] leading-[1.2] text-[#6e6e73] mb-6">
           The Learning Ecosystem.
         </h2>
 
