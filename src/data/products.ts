@@ -91,27 +91,6 @@ export const products: Product[] = [
       "Progress visualization",
     ],
   },
-  {
-    id: "ajs-learning",
-    name: "AJ's Learning",
-    tagline: "Learn, Build, Grow",
-    description:
-      "The content powerhouse behind the ecosystem. Curated courses, video lessons, and interactive content designed by educators for real-world mastery.",
-    gradient: "from-orange-500 via-amber-500 to-yellow-500",
-    icon: "📚",
-    logo: "/logos/ajs-learning-logo.svg",
-    cardLogo: "/logos/ajs-learning-logo.svg",
-    status: "live",
-    href: "/products/ajs-learning",
-    features: [
-      "Curated video courses",
-      "Interactive learning content",
-      "Expert-designed curriculum",
-      "Multi-language support",
-      "Offline access",
-      "Progress tracking",
-    ],
-  },
 ];
 
 export const modules: Module[] = [
