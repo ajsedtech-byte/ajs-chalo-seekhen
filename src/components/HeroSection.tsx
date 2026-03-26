@@ -7,26 +7,29 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden hero-bg">
-      {/* Floating gradient orbs */}
-      <div className="absolute top-[5%] right-[10%] w-75 h-75 bg-indigo-400/[0.08] rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-[15%] left-[5%] w-62.5 h-62.5 bg-violet-400/[0.06] rounded-full blur-[80px] animate-float" style={{ animationDelay: '3s' }} />
-      <div className="absolute top-[40%] left-[60%] w-50 h-50 bg-pink-400/[0.05] rounded-full blur-[70px] animate-pulse-glow" />
+      {/* Visible gradient orbs */}
+      <div className="absolute top-[5%] right-[10%] w-[350px] h-[350px] bg-indigo-400/20 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-[15%] left-[5%] w-[300px] h-[300px] bg-violet-400/15 rounded-full blur-[80px] animate-float" style={{ animationDelay: '3s' }} />
+      <div className="absolute top-[40%] left-[60%] w-[250px] h-[250px] bg-pink-400/10 rounded-full blur-[70px] animate-pulse-glow" />
 
       <div className={`relative z-10 text-center max-w-[880px] mx-auto px-6 transition-all duration-1000 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         {/* Badge */}
         <div className="mb-8">
-          <span className="badge bg-white text-indigo-600 border-indigo-100 shadow-sm shadow-indigo-100/50">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          <span className="badge bg-white text-indigo-700 border-indigo-200 shadow-md shadow-indigo-200/40 text-[13px]">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            </span>
             Ecosystem 2.0 — Now Live
           </span>
         </div>
 
         {/* Heading */}
-        <h1 className="text-[clamp(2.8rem,6.5vw,5.375rem)] font-extrabold tracking-[-0.035em] leading-[1.05] mb-6">
+        <h1 className="text-[clamp(2.8rem,6.5vw,5.375rem)] font-extrabold tracking-[-0.035em] leading-[1.05] mb-6 text-slate-900">
           <span className="gt-shimmer">AJ&apos;s</span>{" "}Chalo Seekhen
         </h1>
 
-        <p className="text-[clamp(1rem,2.2vw,1.2rem)] text-slate-500 max-w-[540px] mx-auto mb-10 leading-[1.7]">
+        <p className="text-[clamp(1rem,2.2vw,1.25rem)] text-slate-600 max-w-[560px] mx-auto mb-10 leading-[1.7]">
           LearnX, Santulan AI, GroerX — academics, life skills, AI-powered growth. Everything students need, in one place.
         </p>
 
@@ -44,7 +47,7 @@ export default function HeroSection() {
           {[{ n: "3+", l: "Products" }, { n: "12+", l: "Modules" }, { n: "1K+", l: "Students" }, { n: "∞", l: "Possibilities" }].map(s => (
             <div key={s.l} className="text-center">
               <div className="text-[2rem] md:text-[2.5rem] font-extrabold gt">{s.n}</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-semibold uppercase tracking-[0.1em]">{s.l}</div>
+              <div className="text-[12px] text-slate-500 mt-1 font-semibold uppercase tracking-[0.1em]">{s.l}</div>
             </div>
           ))}
         </div>
