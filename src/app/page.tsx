@@ -13,42 +13,42 @@ export default function Home() {
       <ModulesSection />
 
       {/* Vision */}
-      <section className="py-24 px-6 bg-indigo-soft">
+      <section className="py-20 px-6 bg-white">
         <ScrollReveal>
-          <div className="max-w-[750px] mx-auto text-center">
-            <p className="text-emerald-600 font-semibold text-[14px] mb-3 tracking-wide">VISION</p>
-            <h2 className="text-[2.2rem] md:text-[2.8rem] font-extrabold tracking-tight leading-tight mb-5">
-              Education is not just about marks. It&apos;s about building <span className="gt">complete humans</span>.
+          <div className="max-w-[680px] mx-auto text-center">
+            <h2 className="text-[40px] md:text-[48px] font-semibold tracking-tight text-[#1d1d1f] leading-[1.07] mb-5">
+              Education is not just about marks.
             </h2>
-            <p className="text-slate-500 text-[17px] leading-relaxed">
-              Academics, life skills, values, creativity, and leadership — all in one unified platform.
+            <p className="text-[21px] text-[#6e6e73] leading-[1.5]">
+              It&apos;s about building complete humans. Academics, life skills, values, creativity, and leadership — all in one unified platform.
             </p>
           </div>
         </ScrollReveal>
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-dark relative overflow-hidden">
-        <div className="absolute top-0 right-[20%] w-[300px] h-[300px] bg-indigo-500/10 rounded-full blur-[100px] animate-float" />
+      <section className="py-20 px-6 bg-[#1d1d1f]">
         <ScrollReveal>
-          <div className="max-w-[650px] mx-auto text-center relative z-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">Ready to start learning?</h2>
-            <p className="text-slate-400 text-lg mb-8">Join thousands of students already on the journey.</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="#products" className="btn-accent px-7 py-3.5 text-[15px]">Get Started</a>
-              <Link href="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 text-[15px] font-semibold text-slate-400 hover:text-white border border-slate-700 rounded-[10px] hover:border-slate-500 transition-all">Talk to Us</Link>
+          <div className="max-w-[580px] mx-auto text-center">
+            <h2 className="text-[40px] md:text-[48px] font-semibold text-white tracking-tight leading-[1.07] mb-4">Ready to start?</h2>
+            <p className="text-[#86868b] text-[19px] mb-8">Join thousands of students already on the journey.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="#products" className="inline-flex items-center gap-2 bg-white text-[#1d1d1f] font-semibold text-[17px] px-7 py-3 rounded-[980px] hover:bg-[#f5f5f7] transition-all">Get Started</a>
+              <Link href="/contact" className="inline-flex items-center gap-2 text-[17px] font-semibold text-[#86868b] hover:text-white transition-colors">
+                Talk to Us <span className="text-[20px]">&rsaquo;</span>
+              </Link>
             </div>
           </div>
         </ScrollReveal>
       </section>
 
       {/* Marquee */}
-      <section className="py-4 border-y border-slate-100 bg-white overflow-hidden">
+      <section className="py-3 border-y border-[#d2d2d7] bg-[#f5f5f7] overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex items-center gap-14 mx-7">
+            <div key={i} className="flex items-center gap-12 mx-6">
               {["LearnX", "Santulan AI", "GroerX", "Vaani", "Pratibimb", "Nirmaan", "Prajna", "Shikha", "Artha", "Sangam", "Guru", "Mitra"].map(n => (
-                <span key={`${n}-${i}`} className="text-[12px] font-bold text-slate-400 tracking-[0.12em] uppercase">{n}</span>
+                <span key={`${n}-${i}`} className="text-[12px] font-semibold text-[#86868b] tracking-[0.08em] uppercase">{n}</span>
               ))}
             </div>
           ))}

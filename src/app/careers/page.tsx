@@ -4,57 +4,58 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = { title: "Careers" };
 const jobs = [
-  { title: "Frontend Developer", type: "Full-time", team: "Engineering", desc: "React, Next.js, Tailwind.", g: "from-blue-500 to-cyan-500" },
-  { title: "Backend Developer", type: "Full-time", team: "Engineering", desc: "Scalable APIs & systems.", g: "from-purple-500 to-indigo-500" },
-  { title: "AI/ML Engineer", type: "Full-time", team: "Santulan AI", desc: "Adaptive learning models.", g: "from-teal-500 to-emerald-500" },
-  { title: "Content Creator", type: "Part-time", team: "Content", desc: "Educational materials.", g: "from-orange-500 to-amber-500" },
-  { title: "UI/UX Designer", type: "Full-time", team: "Design", desc: "Learning experiences.", g: "from-pink-500 to-rose-500" },
-  { title: "Community Manager", type: "Part-time", team: "Growth", desc: "Student community.", g: "from-green-500 to-lime-500" },
+  { title: "Frontend Developer", type: "Full-time", team: "Engineering", desc: "React, Next.js, Tailwind." },
+  { title: "Backend Developer", type: "Full-time", team: "Engineering", desc: "Scalable APIs & systems." },
+  { title: "AI/ML Engineer", type: "Full-time", team: "Santulan AI", desc: "Adaptive learning models." },
+  { title: "Content Creator", type: "Part-time", team: "Content", desc: "Educational materials." },
+  { title: "UI/UX Designer", type: "Full-time", team: "Design", desc: "Learning experiences." },
+  { title: "Community Manager", type: "Part-time", team: "Growth", desc: "Student community." },
 ];
 
 export default function CareersPage() {
   return (
-    <main className="min-h-screen">
-      <section className="py-24 px-6 hero-bg relative">
-        <div className="absolute top-[-10%] right-[10%] w-[350px] h-[350px] bg-emerald-100/30 rounded-full blur-[100px]" />
-        <div className="relative z-10 max-w-[750px] mx-auto text-center">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-[14px] text-indigo-600 font-semibold mb-10">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg> Back
+    <main>
+      <section className="py-20 px-6 bg-[#f5f5f7]">
+        <div className="max-w-[680px] mx-auto text-center">
+          <Link href="/" className="inline-flex items-center gap-1 text-[14px] text-[#0071e3] font-medium mb-10 hover:underline">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg> Back
           </Link>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Join <span className="bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">Our Team</span></h1>
-          <p className="text-slate-500 text-lg max-w-lg mx-auto mb-8">Help us build the future of education. Remote-first, mission-driven.</p>
-          <a href="#jobs" className="btn-p px-7 py-3.5 text-[15px]">View Positions</a>
+          <h1 className="text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-4">Join Our Team</h1>
+          <p className="text-[21px] text-[#6e6e73] mb-8">Help us build the future of education. Remote-first, mission-driven.</p>
+          <a href="#jobs" className="btn-p">View Positions</a>
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-soft">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal><div className="text-center mb-10"><p className="text-amber-600 font-semibold text-[14px] tracking-wide mb-3">PERKS</p><h2 className="text-3xl font-extrabold tracking-tight">Why join us</h2></div></ScrollReveal>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {[{ t: "Remote First", i: "🏠" }, { t: "Learn & Grow", i: "📚" }, { t: "Impact", i: "🌟" }, { t: "Flexible", i: "⏰" }, { t: "Great Team", i: "🤝" }, { t: "Early Stage", i: "🚀" }].map((p, i) => (
-              <ScrollReveal key={p.t} delay={i * 60}><div className="card p-5"><span className="text-xl">{p.i}</span><h3 className="font-bold mt-2 text-[14px]">{p.t}</h3></div></ScrollReveal>
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-[900px] mx-auto">
+          <ScrollReveal><h2 className="text-[32px] font-semibold tracking-tight text-[#1d1d1f] text-center mb-10">Why join us</h2></ScrollReveal>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {[{ t: "Remote First", i: "🏠" }, { t: "Learn & Grow", i: "📚" }, { t: "Real Impact", i: "🌟" }, { t: "Flexible Hours", i: "⏰" }, { t: "Great Team", i: "🤝" }, { t: "Early Stage", i: "🚀" }].map((p, i) => (
+              <ScrollReveal key={p.t} delay={i * 60}>
+                <div className="bg-[#f5f5f7] rounded-2xl p-5"><span className="text-[24px]">{p.i}</span><h3 className="font-semibold text-[15px] text-[#1d1d1f] mt-2">{p.t}</h3></div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="jobs" className="py-20 px-6 bg-white">
-        <div className="max-w-[850px] mx-auto">
-          <ScrollReveal><div className="text-center mb-10"><p className="text-indigo-600 font-semibold text-[14px] tracking-wide mb-3">POSITIONS</p><h2 className="text-3xl font-extrabold tracking-tight">Open roles</h2></div></ScrollReveal>
+      <section id="jobs" className="py-16 px-6 bg-[#f5f5f7]">
+        <div className="max-w-[780px] mx-auto">
+          <ScrollReveal><h2 className="text-[32px] font-semibold tracking-tight text-[#1d1d1f] text-center mb-10">Open roles</h2></ScrollReveal>
           <div className="space-y-3">
             {jobs.map((j, i) => (
               <ScrollReveal key={j.title} delay={i * 60}>
-                <div className="card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="bg-white rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:shadow-md">
                   <div>
-                    <div className="flex items-center gap-2 mb-1"><div className={`w-2 h-2 rounded-full bg-gradient-to-r ${j.g}`} /><h3 className="font-bold">{j.title}</h3></div>
-                    <p className="text-slate-500 text-[13px]">{j.desc}</p>
-                    <div className="flex gap-2 mt-2">
-                      <span className="text-[10px] font-semibold bg-slate-100 text-slate-500 px-2 py-0.5 rounded">{j.type}</span>
-                      <span className="text-[10px] font-semibold bg-slate-100 text-slate-500 px-2 py-0.5 rounded">Remote</span>
-                      <span className={`text-[10px] font-semibold text-white px-2 py-0.5 rounded bg-gradient-to-r ${j.g}`}>{j.team}</span>
+                    <h3 className="font-semibold text-[17px] text-[#1d1d1f]">{j.title}</h3>
+                    <p className="text-[#6e6e73] text-[14px] mb-2">{j.desc}</p>
+                    <div className="flex gap-2">
+                      <span className="text-[11px] font-medium bg-[#f5f5f7] text-[#6e6e73] px-2.5 py-0.5 rounded-full">{j.type}</span>
+                      <span className="text-[11px] font-medium bg-[#f5f5f7] text-[#6e6e73] px-2.5 py-0.5 rounded-full">Remote</span>
+                      <span className="text-[11px] font-medium bg-[#e3f2fd] text-[#0071e3] px-2.5 py-0.5 rounded-full">{j.team}</span>
                     </div>
                   </div>
-                  <Link href="/contact" className="btn-accent px-5 py-2 text-[13px] shrink-0">Apply</Link>
+                  <Link href="/contact" className="btn-p text-[15px] px-5 py-2.5 shrink-0">Apply</Link>
                 </div>
               </ScrollReveal>
             ))}
@@ -62,10 +63,10 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="py-14 px-6 bg-dark text-center">
-        <h2 className="text-2xl font-extrabold text-white mb-3">Don&apos;t see your role?</h2>
-        <p className="text-slate-400 mb-6">Send us your profile.</p>
-        <Link href="/contact" className="btn-accent px-7 py-3 text-[15px]">Get in Touch</Link>
+      <section className="py-14 px-6 bg-[#1d1d1f] text-center">
+        <h2 className="text-[28px] font-semibold text-white mb-3">Don&apos;t see your role?</h2>
+        <p className="text-[#86868b] text-[17px] mb-6">Send us your profile.</p>
+        <Link href="/contact" className="btn-accent">Get in Touch</Link>
       </section>
     </main>
   );

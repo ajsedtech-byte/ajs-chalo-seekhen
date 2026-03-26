@@ -6,25 +6,37 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function ModulesSection() {
   return (
-    <section id="modules" className="py-24 px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <ScrollReveal><div className="text-center mb-14">
-          <p className="text-violet-600 font-semibold text-[14px] mb-3 tracking-wide">MODULES</p>
-          <h2 className="text-[2.5rem] md:text-[3rem] font-extrabold tracking-tight mb-4 leading-tight">12+ Learning <span className="gt">Modules</span></h2>
-          <p className="text-slate-500 text-[17px] max-w-lg mx-auto">Each module powers a unique dimension of growth within the ecosystem.</p>
-        </div></ScrollReveal>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {modules.map((m,i) => (
-            <ScrollReveal key={m.id} delay={i*40}><Link href={`/modules/${m.id}`}>
-              <div className="card card-shine p-5 text-center group cursor-pointer">
-                {m.logo ? <div className="mb-3 flex justify-center"><Image src={m.logo} alt={m.name} width={96} height={96} className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-contain group-hover:scale-105 transition-transform duration-400 drop-shadow-sm" /></div>
-                  : <div className="text-4xl mb-3">{m.icon}</div>}
-                <h3 className="font-bold text-[14px] text-slate-900 mb-0.5">{m.name}</h3>
-                <p className="text-slate-300 text-[11px] mb-1">{m.hindi}</p>
-                <p className="text-slate-400 text-[12px] mb-2">{m.description}</p>
-                <span className="text-[9px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded tracking-wider uppercase">Coming Soon</span>
-              </div>
-            </Link></ScrollReveal>
+    <section id="modules" className="py-20 px-6 bg-[#f5f5f7]">
+      <div className="max-w-[980px] mx-auto">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <h2 className="text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] leading-[1.07] mb-4">
+              12+ Modules.
+            </h2>
+            <p className="text-[21px] text-[#6e6e73] max-w-[500px] mx-auto">
+              Each module powers a unique dimension of growth within the ecosystem.
+            </p>
+          </div>
+        </ScrollReveal>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {modules.map((m, i) => (
+            <ScrollReveal key={m.id} delay={i * 40}>
+              <Link href={`/modules/${m.id}`}>
+                <div className="bg-white rounded-2xl p-5 text-center transition-all duration-300 hover:shadow-md hover:scale-[1.02] cursor-pointer group">
+                  {m.logo ? (
+                    <div className="mb-3 flex justify-center">
+                      <Image src={m.logo} alt={m.name} width={96} height={96} className="w-20 h-20 rounded-xl object-contain group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                  ) : (
+                    <div className="text-4xl mb-3">{m.icon}</div>
+                  )}
+                  <h3 className="font-semibold text-[15px] text-[#1d1d1f] mb-0.5">{m.name}</h3>
+                  <p className="text-[#86868b] text-[12px] mb-1">{m.hindi}</p>
+                  <p className="text-[#6e6e73] text-[13px] mb-2">{m.description}</p>
+                  <span className="text-[10px] font-semibold text-[#0071e3] bg-[#e3f2fd] px-2.5 py-0.5 rounded-full tracking-wide uppercase">Coming Soon</span>
+                </div>
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
       </div>
