@@ -48,7 +48,7 @@ export default function Home() {
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex items-center gap-14 mx-7">
               {["LearnX", "Santulan AI", "GroerX", "Vaani", "Pratibimb", "Nirmaan", "Prajna", "Shikha", "Artha", "Sangam", "Guru", "Mitra"].map(n => (
-                <span key={`${n}-${i}`} className="text-[11px] font-bold text-slate-200 tracking-[0.15em] uppercase">{n}</span>
+                <span key={`${n}-${i}`} className="text-[12px] font-bold text-slate-400 tracking-[0.12em] uppercase">{n}</span>
               ))}
             </div>
           ))}
