@@ -37,7 +37,7 @@ export const products: Product[] = [
     logo: "/logos/learnx-logo-full.png",
     cardLogo: "/logos/Modules_logo/14.png",
     brandColor: "#6366f1",
-    externalUrl: "https://lx-2-0.vercel.app/",
+    externalUrl: "https://learnx.seekhen.com",
     status: "live",
     href: "/products/learnx",
     features: [
