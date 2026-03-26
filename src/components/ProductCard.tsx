@@ -3,11 +3,54 @@ import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/data/products";
 
-const stMap: Record<string, { t: string; c: string }> = { live: { t:"Live", c:"bg-emerald-50 text-emerald-700 border-emerald-200" }, beta: { t:"Beta", c:"bg-amber-50 text-amber-700 border-amber-200" }, "coming-soon": { t:"Coming Soon", c:"bg-indigo-50 text-indigo-700 border-indigo-200" }, "coming-q3": { t:"Q3 2025", c:"bg-purple-50 text-purple-700 border-purple-200" } };
+const stMap: Record<string, { t: string; c: string }> = {
+  live: { t: "Live", c: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+  beta: { t: "Beta", c: "bg-amber-50 text-amber-700 border-amber-200" },
+  "coming-soon": { t: "Coming Soon", c: "bg-indigo-50 text-indigo-700 border-indigo-200" },
+  "coming-q3": { t: "Q3 2025", c: "bg-purple-50 text-purple-700 border-purple-200" },
+};
 
-export default function ProductCard({ product }: { product: Product; index: number }) {
+export default function ProductCard({ product, index, featured }: { product: Product; index: number; featured?: boolean }) {
   const img = product.cardLogo || product.logo;
   const st = stMap[product.status];
+
+  if (featured) {
+    return (
+      <Link href={product.href} className="group block">
+        <div className="card card-shine">
+          <div className="flex flex-col md:flex-row">
+            {/* Image side */}
+            <div className="md:w-1/2 h-64 md:h-auto relative bg-gradient-to-br from-slate-50 to-white overflow-hidden">
+              <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-[0.05] group-hover:opacity-[0.12] transition-opacity duration-500`} />
+              <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 bg-gradient-to-br ${product.gradient} opacity-[0.06] rounded-full blur-[60px] group-hover:opacity-[0.15] group-hover:scale-150 transition-all duration-700`} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                {img ? <Image src={img} alt={product.name} width={220} height={220} className="w-40 h-40 sm:w-48 sm:h-48 object-contain rounded-2xl group-hover:scale-105 transition-transform duration-500 drop-shadow-lg" />
+                  : <span className="text-8xl group-hover:scale-105 transition-transform duration-500">{product.icon}</span>}
+              </div>
+              <div className="absolute top-3 left-3 z-20"><span className={`px-2.5 py-1 text-[10px] font-bold rounded-lg border ${st.c}`}>{st.t}</span></div>
+            </div>
+            {/* Content side */}
+            <div className="md:w-1/2 p-8 flex flex-col justify-center">
+              <h3 className="text-[28px] font-extrabold text-slate-900 mb-2">{product.name}</h3>
+              <p className={`text-[15px] font-semibold bg-gradient-to-r ${product.gradient} bg-clip-text text-transparent mb-3`}>{product.tagline}</p>
+              <p className="text-[14px] text-slate-500 leading-relaxed mb-6">{product.description}</p>
+              <div className="grid grid-cols-2 gap-2 mb-6">
+                {product.features.slice(0, 6).map(f => (
+                  <div key={f} className="flex items-center gap-2 text-[12px] text-slate-500">
+                    <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${product.gradient} shrink-0`} /><span className="truncate">{f}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-1.5 text-[15px] font-semibold text-indigo-600 group-hover:gap-2.5 transition-all">
+                Explore {product.name} <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <Link href={product.href} className="group block">
       <div className="card card-shine">
@@ -25,7 +68,7 @@ export default function ProductCard({ product }: { product: Product; index: numb
           <p className={`text-[13px] font-semibold bg-gradient-to-r ${product.gradient} bg-clip-text text-transparent mb-2`}>{product.tagline}</p>
           <p className="text-[13px] text-slate-500 leading-relaxed mb-4">{product.description}</p>
           <div className="grid grid-cols-2 gap-1 mb-4">
-            {product.features.slice(0,4).map(f => (
+            {product.features.slice(0, 4).map(f => (
               <div key={f} className="flex items-center gap-1.5 text-[11px] text-slate-400">
                 <div className={`w-1 h-1 rounded-full bg-gradient-to-r ${product.gradient} shrink-0`} /><span className="truncate">{f}</span>
               </div>
