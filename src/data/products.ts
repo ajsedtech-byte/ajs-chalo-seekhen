@@ -59,6 +59,7 @@ export const products: Product[] = [
     icon: "⚖️",
     logo: "/logos/Modules_logo/13.png",
     cardLogo: "/logos/Modules_logo/13.png",
+    externalUrl: "https://santulan.seekhen.com",
     status: "coming-q3",
     href: "/products/santulan-ai",
     features: [
@@ -80,6 +81,7 @@ export const products: Product[] = [
     icon: "🚀",
     logo: "/logos/Modules_logo/15.png",
     cardLogo: "/logos/Modules_logo/15.png",
+    externalUrl: "https://groerx.seekhen.com",
     status: "beta",
     href: "/products/groerx",
     features: [
